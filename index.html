@@ -11,9 +11,7 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="js/messages.js"></script>
-    <script src="js/channels.js"></script>
-    <script src="js/main.js"></script>
+
 </head>
 
 <body>
@@ -24,22 +22,35 @@
         </div>
 
         <a class="fab">+</a>
+        <div id="channel-list-area">
+            <h2>Favorites</h2>
+            <ul class="channel-list">
+                <li class="selected">
+                    <i class="material-icons">group</i>
+                    <span class="channel-name">MeetUp</span>
+                    <span class="timestamp">11:51</span>
+                </li>
+                <li>
+                    <i class="material-icons">group</i>
+                    <span class="channel-name">Oktoberfest</span>
+                    <span class="timestamp">10:51</span>
+                </li>
+            </ul>
 
-        <h2>Favorites</h2>
-        <ul class="channel-list">
-            <li class="selected">
-                <i class="material-icons">group</i>
-                <span class="channel-name">MeetUp</span>
-                <span class="timestamp">11:51</span>
-            </li>
-            <li>Oktoberfest</li>
-        </ul>
-
-        <h2>Regular</h2>
-        <ul class="channel-list">
-            <li>WeatherChannel</li>
-            <li>SevenContinents</li>
-        </ul>
+            <h2>Regular</h2>
+            <ul class="channel-list">
+                <li>
+                    <i class="material-icons">group</i>
+                    <span class="channel-name">WeatherChannel</span>
+                    <span class="timestamp">Yesterday</span>
+                </li>
+                <li>
+                    <i class="material-icons">group</i>
+                    <span class="channel-name">SevenContinents</span>
+                    <span class="timestamp">23 May 2018</span>
+                </li>
+            </ul>
+        </div>
     </section>
 
     <section id="message-area">
@@ -55,5 +66,8 @@
         </div>        
     </section>
 </body>
+<script src="js/messages.js"></script>
+<script src="js/channels.js"></script>
+<script src="js/main.js"></script>
 
 </html>
