@@ -95,13 +95,15 @@ h2 {
 .channel-list i.material-icons {
     font-size: 18px;
     color: #666666;
+    line-height: 22px;
 }
 
 .channel-list span {
-    line-height: 28px;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 .channel-list .timestamp {
-    line-height: 28px;
+    line-height: 22px;
     float: right;
 }
