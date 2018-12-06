@@ -47,9 +47,18 @@ h1 {
     line-height: 64px;
 }
 
-.headbar img {
+#logo {
     height: 44px;
-    float: left;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: #00838f;
+    border-radius: 10%; 
+}
+
+#app-title {
+    margin-left: 44px;
+    color: #00838f;
 }
 
 .fab {
@@ -57,7 +66,7 @@ h1 {
     height: 44px;
     background-color:#00838f;
     border-radius: 50%;
-    box-shadow: 0 3px 6px 0 #666666;
+    box-shadow: 0 2px 5px 0 #aaaaaa;
     
     font-size: 36px;
     color: white;
@@ -79,7 +88,12 @@ h2 {
 }
 
 .channel-list li {
+    box-sizing: border-box;
     padding: 22px;
+    height: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .channel-list li.selected {
@@ -92,18 +106,15 @@ h2 {
     color: #666666;
 }
 
-.channel-list i.material-icons {
-    font-size: 18px;
+.channel-list i {
+    font-size: 20px;
     color: #666666;
-    line-height: 22px;
 }
 
-.channel-list span {
+.channel-name {
     font-size: 16px;
-    line-height: 22px;
-}
-
-.channel-list .timestamp {
-    line-height: 22px;
-    float: right;
+    margin: 0px 22px;
+    flex-basis: 80%;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
