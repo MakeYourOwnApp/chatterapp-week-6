@@ -10,7 +10,20 @@ body {
 }
 
 section {    
-    height: 100%;
+    position: fixed;
+    top: 0px;
+    height: 100vh;
+}
+
+#channel-area {
+    width: 299px;
+    height: 100vh;
+    border-right: 1px solid rgb(199, 199, 199);
+}
+
+#message-area {
+    width: calc(100% - 300px);
+    left: 300px;
 }
 
 .headbar {
@@ -18,9 +31,19 @@ section {
     color: #00838f;
     height: 64px;
     line-height: 64px;
+    padding: 0px 22px 0px 22px;
 }
 
-.headbar > img {
+#message-area .headbar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.headbar i {
+    line-height: 64px;
+}
+
+.headbar img {
     height: 44px;
     float: left;
 }
@@ -37,18 +60,9 @@ section {
     text-align: center;
     line-height: 44px;
     
-    position: fixed;
-    left: 225px;
+    position: absolute;
     top: 42px;
+    right: 22px;
 }
 
-#channel-area {
-    width: 299px;
-    float: left;
-    border-right: 1px solid #666;
-}
 
-#message-area {
-    width: calc(100% - 300px);
-    float: right;
-}
