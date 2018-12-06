@@ -64,6 +64,7 @@ function sendMessage() {
     // $('#messages').scrollTop($('#message-area').prop('scrollHeight'));
 
     document.getElementById('message-input').value = '';
+    showMessages();
 }
 // TODO
 // function createMessageElement(messageObject) {
