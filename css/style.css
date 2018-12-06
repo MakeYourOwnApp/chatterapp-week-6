@@ -80,7 +80,7 @@ h1 {
 
 #channel-list-area{
     height: calc(100vh - 66px);
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 h2 {
