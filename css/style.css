@@ -33,8 +33,8 @@ h1 {
 .headbar {
     background-color: #eeeeee;
     color: #00838f;
-    height: 64px;
-    line-height: 64px;
+    height: 66px;
+    line-height: 66px;
     padding: 0px 22px 0px 22px;
 }
 
@@ -44,14 +44,14 @@ h1 {
 }
 
 .headbar i {
-    line-height: 64px;
+    line-height: 66px;
 }
 
 #logo {
     height: 44px;
     position: absolute;
-    left: 10px;
-    top: 10px;
+    left: 11px;
+    top: 11px;
     background-color: #00838f;
     border-radius: 10%; 
 }
@@ -74,7 +74,7 @@ h1 {
     line-height: 44px;
     
     position: absolute;
-    top: 42px;
+    top: 44px;
     right: 22px;
 }
 
