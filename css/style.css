@@ -130,13 +130,19 @@ h2 {
 
 /* message stuff goes here */
 
-#chat-area{
+#chat-area {
+    box-sizing: border-box;
     padding: 22px;
+    height: calc(100vh - 2 * 66px);
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
-    width: 75%;
     margin-bottom: 22px;
+    max-width: 75%;
 }
 
 .message i {
@@ -150,7 +156,11 @@ h2 {
 
 .outgoing-message .timestamp {
     margin-right: 44px;
-    float: right;
+}
+
+.outgoing-message {
+   align-self: flex-end;
+   text-align: right;
 }
 
 .message-wrapper {
@@ -161,16 +171,12 @@ h2 {
 .message-content {
     padding: 11px;
     margin: 0px 11px;
+    text-align: left;
 }
 
 .incoming-message .message-content {
     border-radius: 20px 20px 20px 5px;
     background-color: #eeeeee;
-}
-
-.outgoing-message {
-    width: 75%;
-    float: right;
 }
 
 .outgoing-message .message-content {
