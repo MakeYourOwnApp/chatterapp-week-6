@@ -1,3 +1,6 @@
+/* start the external action and say hello */
+console.log("App is alive");
+
 /** create your user */
 var myUser = "Basti";
 
