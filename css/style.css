@@ -47,9 +47,18 @@ h1 {
     line-height: 64px;
 }
 
-.headbar img {
+#logo {
     height: 44px;
-    float: left;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background-color: #00838f;
+    border-radius: 10%; 
+}
+
+#app-title {
+    margin-left: 44px;
+    color: #00838f;
 }
 
 .fab {
@@ -57,7 +66,7 @@ h1 {
     height: 44px;
     background-color:#00838f;
     border-radius: 50%;
-    box-shadow: 0 3px 6px 0 #666666;
+    box-shadow: 0 2px 5px 0 #aaaaaa;
     
     font-size: 36px;
     color: white;
