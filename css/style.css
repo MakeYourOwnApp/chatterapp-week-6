@@ -134,14 +134,23 @@ h2 {
     padding: 22px;
 }
 
-.incoming-message {
+.message {
     width: 75%;
+    margin-bottom: 22px;
 }
 
-.incoming-message i {
+.message i {
     font-size: 33px;
-    margin-right: 11px;
     color: #666666;
+}
+
+.incoming-message .timestamp {
+    margin-left: 44px;
+}
+
+.outgoing-message .timestamp {
+    margin-right: 44px;
+    float: right;
 }
 
 .message-wrapper {
@@ -150,16 +159,36 @@ h2 {
 }
 
 .message-content {
-    padding: 22px;
+    padding: 11px;
+    margin: 0px 11px;
+}
+
+.incoming-message .message-content {
+    border-radius: 20px 20px 20px 5px;
     background-color: #eeeeee;
 }
 
-.message-content p {
+.outgoing-message {
+    width: 75%;
+    float: right;
 }
 
-.incoming-message h3 {
-    
+.outgoing-message .message-content {
+    background-color: #00838f;
+    border-radius: 20px 20px 5px 20px;
+    color: white;
 }
+
+.message-content h3 {
+    font-size: 14px;
+    color: #00838f;
+    margin-bottom: 11px;
+}
+
+.message-content p {
+    font-size: 14px;
+}
+
 
 #input-area {
     box-sizing: border-box;
