@@ -1,8 +1,8 @@
 var meetUp = {
     name: "MeetUp",
-    latestMessage: Date(2016, 03, 01),
+    latestMessage: 10,
     favorite: true,
-    messages: [message5, message2],
+    messages : [message5, message2]
 };
 
 var oktoberfest = {
