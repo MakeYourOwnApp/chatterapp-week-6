@@ -1,47 +1,54 @@
 * {
     font-family: Roboto, Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    margin: none;
-    padding: none;
+    height: 100%;
+    width: 100%;
+}
+
+section {    
+    height: 100%;
 }
 
 .headbar {
     background-color: #dddddd;
     color: #00838f;
-    height: 100px;
-
-    vertical-align: center;
+    height: 64px;
+    line-height: 64px;
 }
 
 .headbar > img {
-    height: 75px;
+    height: 44px;
     float: left;
 }
 
-#fab {
-    width: 75px;
-    height: 75px;
+.fab {
+    width: 44px;
+    height: 44px;
     background-color:#00838f;
     border-radius: 50%;
-    box-shadow: 0 6px 10px 0 #666;
+    box-shadow: 0 3px 6px 0 #666;
     
-    font-size: 50px;
+    font-size: 36px;
     color: white;
     text-align: center;
-    line-height: 75px;
+    line-height: 44px;
     
     position: fixed;
-    left: calc(30% - 100px);
-    top: 75px;
+    left: 225px;
+    top: 42px;
 }
 
 #channel-area {
-    width: 30%;
+    width: 299px;
     float: left;
+    border-right: 1px solid #666;
 }
 
 #message-area {
-    width: 70%;
+    width: calc(100% - 300px);
+    float: right;
 }
