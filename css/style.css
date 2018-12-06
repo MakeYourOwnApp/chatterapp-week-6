@@ -15,6 +15,10 @@ section {
     height: 100vh;
 }
 
+h1 {
+    font-size: 18px;
+}
+
 #channel-area {
     width: 299px;
     height: 100vh;
@@ -27,7 +31,7 @@ section {
 }
 
 .headbar {
-    background-color: #dddddd;
+    background-color: #eeeeee;
     color: #00838f;
     height: 64px;
     line-height: 64px;
@@ -53,7 +57,7 @@ section {
     height: 44px;
     background-color:#00838f;
     border-radius: 50%;
-    box-shadow: 0 3px 6px 0 #666;
+    box-shadow: 0 3px 6px 0 #666666;
     
     font-size: 36px;
     color: white;
@@ -65,4 +69,39 @@ section {
     right: 22px;
 }
 
+h2 {
+    color: #00838f;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+    margin: 22px 22px 11px 11px; 
+}
 
+.channel-list li {
+    padding: 22px;
+}
+
+.channel-list li.selected {
+    background-color: #eeeeee;
+    border-right: 3px solid #00838f;
+} 
+
+.timestamp {
+    font-size: 12px;
+    color: #666666;
+}
+
+.channel-list i.material-icons {
+    font-size: 18px;
+    color: #666666;
+}
+
+.channel-list span {
+    line-height: 28px;
+}
+
+.channel-list .timestamp {
+    line-height: 28px;
+    float: right;
+}
