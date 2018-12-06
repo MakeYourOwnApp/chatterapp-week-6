@@ -1,1 +1,2 @@
-# chatterapp-week-6
+## Chatter App Challenge
+### Solution Week 6
