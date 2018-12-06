@@ -2,6 +2,11 @@
     font-family: Roboto, Arial, sans-serif;
 }
 
+body {
+    margin: none;
+    padding: none;
+}
+
 .headbar {
     background-color: #dddddd;
     color: #00838f;
@@ -28,6 +33,15 @@
     line-height: 75px;
     
     position: fixed;
-    left: 500px;
-    top: 50px;
+    left: calc(30% - 100px);
+    top: 75px;
+}
+
+#channel-area {
+    width: 30%;
+    float: left;
+}
+
+#message-area {
+    width: 70%;
 }
