@@ -1,0 +1,33 @@
+* {
+    font-family: Roboto, Arial, sans-serif;
+}
+
+.headbar {
+    background-color: #dddddd;
+    color: #00838f;
+    height: 100px;
+
+    vertical-align: center;
+}
+
+.headbar > img {
+    height: 75px;
+    float: left;
+}
+
+#fab {
+    width: 75px;
+    height: 75px;
+    background-color:#00838f;
+    border-radius: 50%;
+    box-shadow: 0 6px 10px 0 #666;
+    
+    font-size: 50px;
+    color: white;
+    text-align: center;
+    line-height: 75px;
+    
+    position: fixed;
+    left: 500px;
+    top: 50px;
+}
