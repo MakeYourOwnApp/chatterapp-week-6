@@ -130,6 +130,37 @@ h2 {
 
 /* message stuff goes here */
 
+#chat-area{
+    padding: 22px;
+}
+
+.incoming-message {
+    width: 75%;
+}
+
+.incoming-message i {
+    font-size: 33px;
+    margin-right: 11px;
+    color: #666666;
+}
+
+.message-wrapper {
+    display: flex;
+    align-items: flex-end;
+}
+
+.message-content {
+    padding: 22px;
+    background-color: #eeeeee;
+}
+
+.message-content p {
+}
+
+.incoming-message h3 {
+    
+}
+
 #input-area {
     box-sizing: border-box;
     display: flex;
