@@ -53,11 +53,12 @@ h1 {
     left: 10px;
     top: 10px;
     background-color: #00838f;
-    border-radius: 50%; 
+    border-radius: 10%; 
 }
 
 #app-title {
     margin-left: 44px;
+    color: #00838f;
 }
 
 .fab {
