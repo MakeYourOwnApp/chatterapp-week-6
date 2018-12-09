@@ -116,6 +116,11 @@ document.getElementById('cancel-button').addEventListener('click', () => {
 });
 
 document.getElementById('check-button').addEventListener('click', createChannel);
+document.getElementById('channel-name').onkeydown = function(e){
+    if(e.keyCode == 13){
+        createChannel();
+    }
+ };
 
 function createChannel() {
     const channelName = document.getElementById('channel-name').value;
@@ -132,6 +137,19 @@ function createChannel() {
     } else {
         return
     }
+}
+
+document.getElementById('favorite-button').addEventListener('click', favoriteChannel)
+
+function favoriteChannel(){
+    currentChannel.favorite = (currentChannel.favorite) ? false : true;
+    channels.forEach(channel => {
+        if(channel.id === currentChannel.id){
+            channel = currentChannel;
+        }
+    })
+    displayChannels();
+    switchChannel(currentChannel.id)
 }
 
 //---------------- Messages-----------------------------------
