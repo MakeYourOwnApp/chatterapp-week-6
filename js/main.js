@@ -284,6 +284,6 @@ function toggleEmojiArea(){
     const emojiArea = document.getElementById('emoji-area');
     const chatArea = document.getElementById('chat-area');
     emojiArea.classList.toggle('toggle-area');
-    chatArea.style.height = (emojiArea.classList.contains('toggle-area')) ? "calc(100vh - 432px)" : "calc(100vh - 132px)";
+    chatArea.style.height = (emojiArea.classList.contains('toggle-area')) ? "calc(100vh - 132px - 250px)" : "calc(100vh - 132px)";
     chatArea.scrollTop = chatArea.scrollHeight;
 }

@@ -263,7 +263,7 @@ h2 {
 
 #emoji-area {
     display: none;
-    height: 300px;
+    height: 250px;
     width: inherit;
     position: fixed;
     left: 400px;
@@ -278,7 +278,7 @@ h2 {
 #emoji-list {
     box-sizing: border-box;
     font-size: 22px;
-    height: 250px;
+    height: 200px;
     width: 100%;
     padding: 0 22px;
     overflow-y: auto;
