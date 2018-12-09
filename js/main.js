@@ -49,7 +49,7 @@ function displayChannels() {
     favoriteList.innerHTML = ""
     regularList.innerHTML = ""
     channels.forEach(channel => {
-        const channelString = ` <li id="` + channel.id + `" onclick="switchChannel(this)">
+        const channelString = ` <li id="` + channel.id + `" onclick="switchChannel(this.id)">
                                     <i class="material-icons">group</i>
                                     <span class="channel-name">` + channel.name + `</span>
                                     <span class="timestamp">`+ channel.latestMessage() + `</span>
@@ -63,14 +63,14 @@ function displayChannels() {
 }
 
 // switch channel on click
-function switchChannel(selectedChannel) {
-    console.log("selected channel with id: " + selectedChannel.id)
+function switchChannel(selectedChannelID) {
+    console.log("selected channel with id: " + selectedChannelID)
     if (!!currentChannel){
         document.getElementById(currentChannel.id).classList.remove("selected")
     }
-    document.getElementById(selectedChannel.id).classList.add("selected")
+    document.getElementById(selectedChannelID).classList.add("selected")
     channels.forEach(channel => {
-        if (channel.id === selectedChannel.id ) {
+        if (channel.id === selectedChannelID ) {
             currentChannel = channel
         }  
     })
@@ -78,8 +78,15 @@ function switchChannel(selectedChannel) {
     if(!!document.getElementById("select-channel")){
         document.getElementById("select-channel").style.display = "none";
         document.getElementById("input-area").style.display = "flex";
+        document.getElementById("message-area-header").style.display = "flex";
     }
-    showMessages()
+    showHeader();
+    showMessages();
+}
+
+function showHeader(){
+    document.getElementById("message-area-header").getElementsByTagName('h1')[0].innerHTML = currentChannel.name;
+    document.getElementById('favorite-button').innerHTML = (currentChannel.favorite)? "favorite" : "favorite_border";
 }
 
 /** Constructor Function for channels */
@@ -91,7 +98,7 @@ function Channel(name) {
 }
 
 Channel.prototype.latestMessage = function() {
-    if (!!this.messages){
+    if (!!this.messages.length){
         const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
         return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
         } else {
@@ -99,17 +106,32 @@ Channel.prototype.latestMessage = function() {
     }
 }
 
+document.getElementById('fab').addEventListener('click', () => {
+    document.getElementById('modal').style.display = "flex";
+});
+
+document.getElementById('cancel-button').addEventListener('click', () => {
+    document.getElementById('modal').style.display = "none";
+    document.getElementById('channel-name').value = '';
+});
+
+document.getElementById('check-button').addEventListener('click', createChannel);
+
 function createChannel() {
-
-    const channelName = document.getElementById('#new-channel').value;
-    const channel = new Channel(channelName);
-    currentChannel = channel;
-    channels.push(channel);
-
-    document.getElementById('channels ul').append(createChannelElement(channel));
-
-    console.log('New channel: ' + channel);
-
+    const channelName = document.getElementById('channel-name').value;
+    // check if input is empty
+    if (!!channelName) {
+        const channel = new Channel (channelName)
+        console.log("New Channel: ", channel);
+        channels.push(channel);
+        document.getElementById('channel-name').value = '';
+        document.getElementById('modal').style.display = "none";
+        currentChannel = channel;
+        displayChannels();
+        switchChannel(channel.id);
+    } else {
+        return
+    }
 }
 
 //---------------- Messages-----------------------------------
@@ -132,12 +154,10 @@ document.getElementById('message-input').onkeydown = function(e){
  };
 
 
-// document.getElementById('fab').addEventListener('click', createChannel);
-
-
 function sendMessage() {
-    var input = document.getElementById('message-input').value;
+    const input = document.getElementById('message-input').value;
     // check if input is empty
+    // TODO change color of send button
     if (!!input) {
         const message = new Message (input)
         console.log("New message: ", message);

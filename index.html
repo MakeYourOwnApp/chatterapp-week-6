@@ -20,7 +20,7 @@
             <img src="https://ip.lfe.mw.tum.de/sections/moocus.png" alt="logo" id="logo">
             <h1 id="app-title">chatter | app</h1>
         </div>
-        <a class="fab">+</a>
+        <a id="fab">+</a>
         <div id="channel-list-area">
             <h2>Favorites</h2>
             <ul class="channel-list" id="favorite-channels"></ul>
@@ -30,9 +30,9 @@
     </section>
 
     <section id="message-area">
-        <div class="headbar">
-            <h1>MeetUp</h1>
-            <i id="favorite-button" class="material-icons">favorite</i>
+        <div class="headbar" id="message-area-header">
+            <h1></h1>
+            <i id="favorite-button" class="material-icons"></i>
         </div>
         <div id="chat-area">
             <p id="select-channel">Select a channel to start messaging.</p>
@@ -46,7 +46,7 @@
     <section id="modal">
             <div id="channel-input">
                 <p>Channel Name</p>
-                <input type="text" id="channel-name" name="channel-name" minlength="1" maxlength="500" placeholder="... write your message">
+                <input type="text" id="channel-name" name="channel-name" minlength="1" maxlength="500">
                 <i class="material-icons button" id="cancel-button">cancel</i>
                 <i class="material-icons button" id="check-button">check</i>
             </div>

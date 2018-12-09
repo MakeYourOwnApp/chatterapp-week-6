@@ -38,8 +38,8 @@ h1 {
     padding: 0px 22px 0px 22px;
 }
 
-#message-area .headbar {
-    display: flex;
+#message-area-header {
+    display: none;
     justify-content: space-between;
 }
 
@@ -61,7 +61,7 @@ h1 {
     color: #00838f;
 }
 
-.fab {
+#fab {
     width: 44px;
     height: 44px;
     background-color:#00838f;
