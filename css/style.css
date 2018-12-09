@@ -43,7 +43,7 @@ h1 {
     justify-content: space-between;
 }
 
-.headbar i {
+.headbar a {
     line-height: 66px;
 }
 
@@ -171,7 +171,7 @@ h2 {
 #chat-area {
     box-sizing: border-box;
     padding: 22px;
-    height: calc(100vh - 2 * 66px);
+    height: calc(100% - 2 * 66px);
     width: 100%;
     overflow-y: auto;
     display: flex;
@@ -259,6 +259,34 @@ h2 {
     color: white;
     background-color: #00838f;
     border-radius: 50%;
+}
+
+#emoji-area {
+    display: none;
+    height: 300px;
+    width: inherit;
+    position: fixed;
+    left: 400px;
+    bottom: 66px;
+    background-color: #eeeeee
+}
+
+.toggle-area {
+    display: block !important;
+}
+
+#emoji-list {
+    box-sizing: border-box;
+    font-size: 22px;
+    height: 250px;
+    width: 100%;
+    padding: 0 22px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+#emoji-list span {
+    margin-right: 5px;
 }
 
 #message-input {    

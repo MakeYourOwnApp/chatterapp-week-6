@@ -14,6 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     getMessages();
     loadMessagesIntoChannel();
     displayChannels();
+    loadEmojis();
 });
 
 
@@ -262,3 +263,27 @@ function receiveEchoMessage() {
     showMessages();
 }
 
+// --------------------- Emojis ----------------------------
+
+// load emojis into div
+function loadEmojis() {
+    for (let i = 0; i < emojis.length; i++) {
+        document.getElementById("emoji-list").innerHTML += `<span class="button">` + emojis[i] + `</span>`
+    }
+    const emojisInArea = document.getElementById('emoji-list').childNodes 
+    for (let i = 0; i < emojisInArea.length; i++) {
+        emojisInArea[i].addEventListener('click', function(){
+            document.getElementById('message-input').value += this.innerHTML
+        });
+    }
+}
+
+document.getElementById('emoticon-button').addEventListener('click', toggleEmojiArea);
+
+function toggleEmojiArea(){
+    const emojiArea = document.getElementById('emoji-area');
+    const chatArea = document.getElementById('chat-area');
+    emojiArea.classList.toggle('toggle-area');
+    chatArea.style.height = (emojiArea.classList.contains('toggle-area')) ? "calc(100vh - 432px)" : "calc(100vh - 132px)";
+    chatArea.scrollTop = chatArea.scrollHeight;
+}

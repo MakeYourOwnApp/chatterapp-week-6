@@ -32,24 +32,28 @@
     <section id="message-area">
         <div class="headbar" id="message-area-header">
             <h1></h1>
-            <i id="favorite-button" class="material-icons button"></i>
+            <a id="favorite-button" class="material-icons button"></a>
         </div>
         <div id="chat-area">
             <p id="select-channel">Select a channel to start messaging.</p>
         </div>
         <div id="input-area">
-            <i class="material-icons button" id="emoticon-button">insert_emoticon</i>
+            <a class="material-icons button" id="emoticon-button">insert_emoticon</a>
             <input type="text" id="message-input" name="message-input" minlength="1" maxlength="500" placeholder="... write your message">
-            <i class="material-icons button" id="send-button">send</i>
-        </div>        
+            <a class="material-icons button" id="send-button">send</a>
+        </div>
+        <div id="emoji-area">
+                <h2>Emojis</h2>
+                <div id="emoji-list"></div>
+        </div>   
     </section>
     <section id="modal">
             <div id="channel-input">
                 <p>Channel Name</p>
                 <input type="text" id="channel-name" name="channel-name" minlength="1" maxlength="500">
                 <div id="modal-buttons">
-                    <i class="material-icons button" id="cancel-button">cancel</i>
-                    <i class="material-icons button" id="check-button">check</i>
+                    <a class="material-icons button" id="cancel-button">cancel</a>
+                    <a class="material-icons button" id="check-button">check</a>
                 </div>
             </div>
     </section>
@@ -57,5 +61,5 @@
 <script src="js/messages.js"></script>
 <script src="js/channels.js"></script>
 <script src="js/main.js"></script>
-
+<script src="js/emojis.js"></script>
 </html>
