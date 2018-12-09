@@ -273,7 +273,8 @@ function loadEmojis() {
     const emojisInArea = document.getElementById('emoji-list').childNodes 
     for (let i = 0; i < emojisInArea.length; i++) {
         emojisInArea[i].addEventListener('click', function(){
-            document.getElementById('message-input').value += this.innerHTML
+            document.getElementById('message-input').value += this.innerHTML;
+            document.getElementById('send-button').style.color = "#00838f";
         });
     }
 }
