@@ -97,9 +97,22 @@ h1 {
 
 #channel-input {
     background-color: #eeeeee;
-    height: 132px;
-    width: 264px;
+    height: 200px;
+    width: 300px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#channel-input input {
+    height: 44px;
+    margin: 22px;    
+    padding: 0 11px;
+    border: none;
+    border-radius: 11px;
+    font-size: 12px;
 }
 
 #channel-list-area{
