@@ -1,15 +1,13 @@
 /* start the external action and say hello */
 console.log("App is alive");
 
-/** create your user */
-const myUserName = "Basti";
-
 let channels = [];
 let messages = [];
 
 /** create global variable for the currently selected channel */
 let currentChannel;
 
+// Functions to execute when DOM has loaded
 document.addEventListener("DOMContentLoaded", () => {
     console.log("App is initialized")
     getChannels();
@@ -62,7 +60,10 @@ function displayChannels() {
     })
 }
 
-// switch channel on click
+/** 
+ * Switches channel 
+ * @param {string} selectedChannelID - ID of channel to switch to.
+ */
 function switchChannel(selectedChannelID) {
     console.log("selected channel with id: " + selectedChannelID)
     if (!!currentChannel){
@@ -89,7 +90,10 @@ function showHeader(){
     document.getElementById('favorite-button').innerHTML = (currentChannel.favorite)? "favorite" : "favorite_border";
 }
 
-/** Constructor Function for channels */
+/** 
+ * Channel Constructor Function
+ * @param {string} name - Name of the channel.
+ */
 function Channel(name) {
     this.id = Math.random().toString(36).substr(2, 10);
     this.name = name;
@@ -97,6 +101,7 @@ function Channel(name) {
     this.messages = [];
 }
 
+// Object method that returns the date of the latest message
 Channel.prototype.latestMessage = function() {
     if (!!this.messages.length){
         const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
@@ -106,15 +111,18 @@ Channel.prototype.latestMessage = function() {
     }
 }
 
+// Event listener: New channel modal is shown if users clicks on floating action button
 document.getElementById('fab').addEventListener('click', () => {
     document.getElementById('modal').style.display = "flex";
 });
 
+// Event listener: New channel modal is hidden if users clicks on cancel button
 document.getElementById('cancel-button').addEventListener('click', () => {
     document.getElementById('modal').style.display = "none";
     document.getElementById('channel-name').value = '';
 });
 
+// Event listener: New channel will be created if users clicks on check button or presses enter
 document.getElementById('check-button').addEventListener('click', createChannel);
 document.getElementById('channel-name').onkeydown = function(e){
     if(e.keyCode == 13){
@@ -122,9 +130,9 @@ document.getElementById('channel-name').onkeydown = function(e){
     }
  };
 
+// New channel is created with value from input. Return if input is empty
 function createChannel() {
     const channelName = document.getElementById('channel-name').value;
-    // check if input is empty
     if (!!channelName) {
         const channel = new Channel (channelName)
         console.log("New Channel: ", channel);
@@ -139,8 +147,10 @@ function createChannel() {
     }
 }
 
+// Event listener: Call favoriteChannel() if user clicks on favorite button
 document.getElementById('favorite-button').addEventListener('click', favoriteChannel)
 
+// Toggles favorite property of channel and displays channel accordingly in sidebar
 function favoriteChannel(){
     currentChannel.favorite = (currentChannel.favorite) ? false : true;
     channels.forEach(channel => {
@@ -154,42 +164,57 @@ function favoriteChannel(){
 
 //---------------- Messages-----------------------------------
 
-/** Constructor Function for messages */
-function Message(text) {
-    this.createdBy = myUserName;
+/** 
+ * Message Constructor Function
+ * @param {string} user - Name of sender.
+ * @param {boolean} own - Own (outgoing) message or incoming.
+ * @param {string} text - Message text.
+ * @param {string} channelID - ID of channel in which message is sent.
+ */
+function Message(user, own, text, channelID) {
+    this.createdBy = user;
     this.createdOn = new Date (Date.now());
-    this.own = true;
+    this.own = own;
     this.text = text;
-    this.channel = currentChannel.id;
+    this.channel = channelID;
 }
 
-// execute sendMessage function when user clicks send button or presses enter
+// Event Listener: New message will be sent if user clicks send button or presses enter.
+// send button is grayed out if there is no input provided
 document.getElementById('send-button').addEventListener('click', sendMessage);
-document.getElementById('message-input').onkeydown = function(e){
+document.getElementById('message-input').onkeyup = function(e){
+    if (!!document.getElementById('message-input').value) {
+        document.getElementById('send-button').style.color = "#00838f"
+    } else {
+        document.getElementById('send-button').style.color = "#00838f54";
+    }
     if(e.keyCode == 13){
         sendMessage()
     }
  };
 
 
+ // Check if input is provided, send message, and clear input. Return if not.
 function sendMessage() {
-    const input = document.getElementById('message-input').value;
-    // check if input is empty
-    // TODO change color of send button
-    if (!!input) {
-        const message = new Message (input)
+    const text = document.getElementById('message-input').value;
+    if (!!text) {
+        const myUserName = "Basti";
+        const own = true;
+        const channelID = currentChannel.id;
+        const message = new Message (myUserName, own, text, channelID)
         console.log("New message: ", message);
         currentChannel.messages.push(message);
         document.getElementById('message-input').value = '';
+        document.getElementById('send-button').style.color = "#00838f54";
         showMessages();
+        setTimeout(receiveEchoMessage, 1500);
     } else {
         return
     }
 }
 
-/**
- * This function clears the message view and shows the messages of the selected channel
- */
+
+// Show the messages of the selected channel
 function showMessages() {
     const chatArea = document.getElementById('chat-area');
     chatArea.innerHTML = ""
@@ -223,5 +248,16 @@ function showMessages() {
     chatArea.scrollTop = chatArea.scrollHeight;
     //update timestamp in channel area
     document.getElementById(currentChannel.id).querySelector(".timestamp").innerHTML = currentChannel.latestMessage();
+}
+
+// get an echo message
+function receiveEchoMessage() {
+    const userName = "Lorenz";
+    const own = false;
+    const text = "You wrote: " + currentChannel.messages.slice(-1)[0].text;
+    const channelID = currentChannel.id;
+    const message = new Message (userName, own, text, channelID);
+    currentChannel.messages.push(message);
+    showMessages();
 }
 

@@ -76,7 +76,9 @@ h1 {
     position: absolute;
     top: 44px;
     right: 22px;
+}
 
+.button {
     cursor: pointer;
 }
 
@@ -152,10 +154,6 @@ h2 {
 }
 
 /* message stuff goes here */
-
-#favorite-button {
-    cursor: pointer;
-}
 
 #chat-area {
     box-sizing: border-box;
@@ -248,7 +246,6 @@ h2 {
     color: white;
     background-color: #00838f;
     border-radius: 50%;
-    cursor: pointer;
 }
 
 #message-input {    
@@ -262,6 +259,5 @@ h2 {
 }
 
 #send-button {
-    color: #00838f;
-    cursor: pointer;
+    color: #00838f54;
 }
