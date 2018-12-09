@@ -85,6 +85,7 @@ function switchChannel(selectedChannelID) {
     showMessages();
 }
 
+// changes header name and favorite button
 function showHeader(){
     document.getElementById("message-area-header").getElementsByTagName('h1')[0].innerHTML = currentChannel.name;
     document.getElementById('favorite-button').innerHTML = (currentChannel.favorite)? "favorite" : "favorite_border";
