@@ -20,36 +20,12 @@
             <img src="https://ip.lfe.mw.tum.de/sections/moocus.png" alt="logo" id="logo">
             <h1 id="app-title">chatter | app</h1>
         </div>
-
         <a class="fab">+</a>
         <div id="channel-list-area">
             <h2>Favorites</h2>
-            <ul class="channel-list">
-                <li class="selected">
-                    <i class="material-icons">group</i>
-                    <span class="channel-name">MeetUp</span>
-                    <span class="timestamp">11:51</span>
-                </li>
-                <li>
-                    <i class="material-icons">group</i>
-                    <span class="channel-name">Oktoberfest</span>
-                    <span class="timestamp">10:51</span>
-                </li>
-            </ul>
-
+            <ul class="channel-list" id="favorite-channels"></ul>
             <h2>Regular</h2>
-            <ul class="channel-list">
-                <li>
-                    <i class="material-icons">group</i>
-                    <span class="channel-name">WeatherChannel</span>
-                    <span class="timestamp">Yesterday</span>
-                </li>
-                <li>
-                    <i class="material-icons">group</i>
-                    <span class="channel-name">SevenContinents</span>
-                    <span class="timestamp">23 May 2018</span>
-                </li>
-            </ul>
+            <ul class="channel-list" id="regular-channels"></ul>
         </div>
     </section>
 
@@ -59,89 +35,21 @@
             <i id="favorite-button" class="material-icons">favorite</i>
         </div>
         <div id="chat-area">
-            <div class="message incoming-message">
-                <div class="message-wrapper">
-                    <i class="material-icons">account_circle</i>
-                    <div class="message-content">
-                        <h3>Jessie Koch</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat eveniet porro officia, nesciunt aut delectus incidunt possimus illum placeat repudiandae reiciendis corporis ab. Iste vel ducimus blanditiis, tempora adipisci doloribus.</p>
-                    </div>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message outgoing-message">
-                <div class="message-wrapper">
-                    <div class="message-content">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat eveniet porro officia, nesciunt aut delectus incidunt possimus illum placeat repudiandae reiciendis corporis ab. Iste vel ducimus blanditiis, tempora adipisci doloribus.</p>
-                    </div>
-                    <i class="material-icons">account_circle</i>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message outgoing-message">
-                <div class="message-wrapper">
-                    <div class="message-content">
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat eveniet porro officia, nesciunt aut delectus incidunt possimus illum placeat repudiandae reiciendis corporis ab. Iste vel ducimus blanditiis, tempora adipisci doloribus.</p>
-                    </div>
-                    <i class="material-icons">account_circle</i>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message outgoing-message">
-                <div class="message-wrapper">
-                    <div class="message-content">
-                        <p>Lorem ipsum.</p>
-                    </div>
-                    <i class="material-icons">account_circle</i>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message incoming-message">
-                <div class="message-wrapper">
-                    <i class="material-icons">account_circle</i>
-                    <div class="message-content">
-                        <h3>Jessie Koch</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Repellat eveniet porro officia, nesciunt aut delectus incidunt possimus illum placeat repudiandae reiciendis corporis ab. Iste vel ducimus blanditiis, tempora adipisci doloribus.</p>
-                    </div>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message incoming-message">
-                <div class="message-wrapper">
-                    <i class="material-icons">account_circle</i>
-                    <div class="message-content">
-                        <h3>Jessie Koch</h3>
-                        <p>Lorem ipsum Lorem ipsum dolor, sit amet consectetur adipisicing elit. Consectetur dolor voluptas debitis deleniti iure consequatur saepe! Sed repellendus accusantium neque nemo doloremque ipsa deleniti. Cumque rem repudiandae accusamus dolores adipisci!.</p>
-                    </div>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message incoming-message">
-                <div class="message-wrapper">
-                    <i class="material-icons">account_circle</i>
-                    <div class="message-content">
-                        <h3>Jessie Koch</h3>
-                        <p>Lorem ipsum 
-                        </p>
-                    </div>
-                </div>
-                <span class="timestamp">11:45</span>
-            </div>
-            <div class="message outgoing-message">
-                    <div class="message-wrapper">
-                        <div class="message-content">
-                            <p>Lorem ipsum.</p>
-                        </div>
-                        <i class="material-icons">account_circle</i>
-                    </div>
-                    <div class="timestamp">11:45</div>
-                </div>
+            <p id="select-channel">Select a channel to start messaging.</p>
         </div>
         <div id="input-area">
             <i class="material-icons" id="emoticon-button">insert_emoticon</i>
             <input type="text" id="message-input" name="message-input" minlength="1" maxlength="500" placeholder="... write your message">
             <i class="material-icons button" id="send-button">send</i>
         </div>        
+    </section>
+    <section id="modal">
+            <div id="channel-input">
+                <p>Channel Name</p>
+                <input type="text" id="channel-name" name="channel-name" minlength="1" maxlength="500" placeholder="... write your message">
+                <i class="material-icons button" id="cancel-button">cancel</i>
+                <i class="material-icons button" id="check-button">check</i>
+            </div>
     </section>
 </body>
 <script src="js/messages.js"></script>

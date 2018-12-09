@@ -1,30 +1,37 @@
-var message1 = {
-    createdBy: "Jack Blue",
-    createdOn: Date.now(),
-    own: false,
-    text: 'What\'s up?',
-};
-var message2 = {
-    createdBy: "Christina Buck",
-    createdOn: Date.now(),
-    own: false,
-    text: 'The new chatter app looks lit!',
-};
-var message3 = {
-    createdBy: "Sabrina Adams",
-    createdOn: Date.now(),
-    own: false,
-    text: 'Learning js is so much fun. What do you think about it?',
-};
-var message4 = {
-    createdBy: "Marco Boss",
-    createdOn: Date.now(),
-    own: false,
-    text: 'I wanna go to Australia!',
-};
-var message5 = {
-    createdBy: "Jessie Franklin",
-    createdOn: Date.now(),
-    own: false,
-    text: 'What do you think about html and css?',
-};
+const mockMessages = [
+    {
+        createdBy: "Jack Blue",
+        createdOn: new Date('December 08, 2018 17:24:00'),
+        channel: "0nlbop5f1e",
+        own: false,
+        text: 'What\'s up?',
+    },
+    {
+        createdBy: "Christina Buck",
+        createdOn: new Date('December 08, 2018 17:24:00'),
+        channel: "0nlbop5f1e",
+        own: false,
+        text: 'The new chatter app looks lit!',
+    },
+    {
+        createdBy: "Sabrina Adams",
+        createdOn: new Date('December 08, 2018 17:24:00'),
+        channel: "0nlbop5f1e",
+        own: false,
+        text: 'Learning js is so much fun. What do you think about it?',
+    },
+    {
+        createdBy: "Marco Boss",
+        createdOn: new Date('December 08, 2018 17:24:00'),
+        own: false,
+        channel: "achndt7tst",
+        text: 'I wanna go to Australia!',
+    },
+    {
+        createdBy: "Jessie Franklin",
+        createdOn: new Date('December 08, 2018 17:24:00'),
+        channel: "achndt7tst",
+        own: false,
+        text: 'Me too',
+    }
+]

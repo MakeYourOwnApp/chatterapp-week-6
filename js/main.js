@@ -2,149 +2,188 @@
 console.log("App is alive");
 
 /** create your user */
-var myUser = "Basti";
+const myUserName = "Basti";
+
+let channels = [];
+let messages = [];
 
 /** create global variable for the currently selected channel */
-var currentChannel;
+let currentChannel;
 
-/** initialize the currently selected channel */
-currentChannel = meetUp;
+document.addEventListener("DOMContentLoaded", () => {
+    console.log("App is initialized")
+    getChannels();
+    getMessages();
+    loadMessagesIntoChannel();
+    displayChannels();
+});
 
-/** initialize the app as soon as the DOM is completely loaded */
-window.onload = initializeApp;
 
-// function getLatestMessage() {
-//     return 5;
-// }
+//---------------- Channels-----------------------------------
 
-/** get date of latest message in the channel */
-function getLatestMessage() {
-    let length = currentChannel.messages.length;
-    currentChannel.latestMessage = currentChannel.messages[length - 1].createdOn;
+// get existing channels from mock file or database
+function getChannels(){
+    channels = mockChannels;
 }
 
-
-function initializeApp() {
-    console.log('App is initialized!');
-    // listChannels();
+// get existing messages from mock file or database
+function getMessages(){
+    messages = mockMessages;
 }
 
-
-/** Constructor Function for messages */
-function Message(text) {
-    this.createdBy = myUser;
-    this.createdOn = Date.now();
-    this.own = true;
-    this.text = text;
+// load existing messages into respective channel
+function loadMessagesIntoChannel() {
+    channels.forEach(channel => {
+        messages.forEach(message => {
+            if (message.channel === channel.id) {
+                channel.messages.push(message)
+            }
+        })
+    })
 }
 
-document.getElementById('send-button').addEventListener('click', sendMessage);
-// document.getElementById('fab').addEventListener('click', createChannel);
-
-
-function sendMessage() {
-    // #10 only send #messages if text is not #empty
-    var text = document.getElementById('message-input').value;
-
-    if (text.length == 0) {
-        //exit if no text
-        alert("Please enter some text");
-        return;
-    }
-
-    var message = new Message(text);
-    console.log("New message: ", message);
-
-    currentChannel.messages.push(message);
-
-    // // Adding the message to the messages-div
-    // $('#messages').append(createMessageElement(message));
-
-    // // messages will scroll to a certain point if we apply a certain height, in this case the overall scrollHeight of the messages-div that increases with every message;
-    // $('#messages').scrollTop($('#message-area').prop('scrollHeight'));
-
-    document.getElementById('message-input').value = '';
-    showMessages();
-}
-// TODO
-// function createMessageElement(messageObject) {
-
-// }
-
-/**
- * This function clears the message view and shows the messages of the selected channel
- */
-function showMessages() {
-    // document.getElementById('chat-area').;
-    // for (let i = 0; i < currentChannel.messages.length; i++) {
-    //     document.getElementById('chat-area').append(currentChannel.messages[i]);
-    // }
-    {
-        var e = "<hr/>";   
-         
-        for (let y=0; y<currentChannel.messages.length; y++)
-        {
-          e += `Element ${y} = ${currentChannel.messages[y].text}<br/>`;
+// display channels in channel area 
+function displayChannels() {
+    const favoriteList = document.getElementById('favorite-channels');
+    const regularList = document.getElementById('regular-channels');
+    favoriteList.innerHTML = ""
+    regularList.innerHTML = ""
+    channels.forEach(channel => {
+        const channelString = ` <li id="` + channel.id + `" onclick="switchChannel(this)">
+                                    <i class="material-icons">group</i>
+                                    <span class="channel-name">` + channel.name + `</span>
+                                    <span class="timestamp">`+ channel.latestMessage() + `</span>
+                                </li>`
+        if (channel.favorite) {
+            favoriteList.innerHTML += channelString
+        } else {
+            regularList.innerHTML += channelString
         }
-        document.getElementById("chat-area").innerHTML = e;
-     }
+    })
 }
 
-
+// switch channel on click
+function switchChannel(selectedChannel) {
+    console.log("selected channel with id: " + selectedChannel.id)
+    if (!!currentChannel){
+        document.getElementById(currentChannel.id).classList.remove("selected")
+    }
+    document.getElementById(selectedChannel.id).classList.add("selected")
+    channels.forEach(channel => {
+        if (channel.id === selectedChannel.id ) {
+            currentChannel = channel
+        }  
+    })
+    // hide user prompt and show input area the first time a user selects a channel
+    if(!!document.getElementById("select-channel")){
+        document.getElementById("select-channel").style.display = "none";
+        document.getElementById("input-area").style.display = "flex";
+    }
+    showMessages()
+}
 
 /** Constructor Function for channels */
-function Channel(text) {
-    this.name = text;
-    this.latestMessage = Date.now();
+function Channel(name) {
+    this.id = Math.random().toString(36).substr(2, 10);
+    this.name = name;
     this.favorite = false;
     this.messages = [];
 }
 
-function createChannel() {
-    var name = document.getElementById('#new-channel').value;
-    var text = document.getElementById('message-input').value;
+Channel.prototype.latestMessage = function() {
+    if (!!this.messages){
+        const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
+        return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+        } else {
+           return "No Messages"
+    }
+}
 
-    var channel = new Channel(name);
+function createChannel() {
+
+    const channelName = document.getElementById('#new-channel').value;
+    const channel = new Channel(channelName);
     currentChannel = channel;
     channels.push(channel);
 
     document.getElementById('channels ul').append(createChannelElement(channel));
 
     console.log('New channel: ' + channel);
-    // send initial message into channel
-    sendMessage();
-
-    // return to normal view
-    // TODO
-    // abortCreationMode();
 
 }
 
-/* liking a channel on #click */
-// function star() {
+//---------------- Messages-----------------------------------
 
-// }
+/** Constructor Function for messages */
+function Message(text) {
+    this.createdBy = myUserName;
+    this.createdOn = new Date (Date.now());
+    this.own = true;
+    this.text = text;
+    this.channel = currentChannel.id;
+}
+
+// execute sendMessage function when user clicks send button or presses enter
+document.getElementById('send-button').addEventListener('click', sendMessage);
+document.getElementById('message-input').onkeydown = function(e){
+    if(e.keyCode == 13){
+        sendMessage()
+    }
+ };
 
 
+// document.getElementById('fab').addEventListener('click', createChannel);
 
+
+function sendMessage() {
+    var input = document.getElementById('message-input').value;
+    // check if input is empty
+    if (!!input) {
+        const message = new Message (input)
+        console.log("New message: ", message);
+        currentChannel.messages.push(message);
+        document.getElementById('message-input').value = '';
+        showMessages();
+    } else {
+        return
+    }
+}
 
 /**
- * This function enables the "create new channel"-mode
+ * This function clears the message view and shows the messages of the selected channel
  */
-// function initCreationMode() {
-//     $('#app-bar-messages').hide();
-//     $('#app-bar-create').addClass('show');
-//     $('#messages').empty();
-//     $('#button-send').hide();
-//     $('#button-create').show();
-// }
+function showMessages() {
+    const chatArea = document.getElementById('chat-area');
+    chatArea.innerHTML = ""
+    currentChannel.messages.forEach(message => {
+        const messageTime = message.createdOn.toLocaleTimeString("de-DE", {hour: "numeric", minute: "numeric"});
+        let messageString;
+        if (message.own){
+            messageString =   `<div class="message outgoing-message">
+                                    <div class="message-wrapper">
+                                        <div class="message-content">
+                                            <p>` + message.text + `</p>
+                                        </div>
+                                        <i class="material-icons">account_circle</i>
+                                    </div>
+                                    <span class="timestamp">`+ messageTime + `</span>
+                                </div>`;
+        } else {
+            messageString =   `<div class="message incoming-message">
+                                    <div class="message-wrapper">
+                                        <i class="material-icons">account_circle</i>
+                                        <div class="message-content">
+                                            <h3>` + message.createdBy + `</h3>
+                                            <p>` + message.text + `</p>
+                                        </div>
+                                    </div>
+                                    <span class="timestamp">`+ messageTime + `</span>
+                                </div>`;
+        }
+        chatArea.innerHTML += messageString;
+    })
+    chatArea.scrollTop = chatArea.scrollHeight;
+    //update timestamp in channel area
+    document.getElementById(currentChannel.id).querySelector(".timestamp").innerHTML = currentChannel.latestMessage();
+}
 
-// /**
-//  * This function aborts the "create new channel"-mode
-//  */
-// function abortCreationMode() {
-//     $('#app-bar-messages').show();
-//     $('#app-bar-create').removeClass('show');
-//     $('#button-create').hide();
-//     $('#button-send').show();
-// }

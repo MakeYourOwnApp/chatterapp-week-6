@@ -1,33 +1,58 @@
-var meetUp = {
-    name: "MeetUp",
-    latestMessage: 10,
-    favorite: true,
-    messages : [message5, message2]
-};
-
-var oktoberfest = {
-    name: "MeetUp",
-    latestMessage: Date(2016, 03, 01),
-    favorite: true,
-    messages: [message1, message4]
-};
-
-var weatherChannel = {
-    name: "MeetUp",
-    latestMessage: Date(2016, 03, 01),
-    favorite: true,
-    messages: [message1, message3]
-};
-var sevenContinents = {
-    name: "MeetUp",
-    latestMessage: Date(2016, 03, 01),
-    favorite: true,
-    messages: [message4]
-};
-
-var channels = [
-    meetUp,
-    oktoberfest,
-    weatherChannel,
-    sevenContinents
+const mockChannels = [
+    {   
+        id: "0nlbop5f1e",
+        name: "MeetUp",
+        favorite: true,
+        messages : [],
+        latestMessage () {
+            if (!!this.messages.length){
+                const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
+                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                } else {
+                   return "No Messages"
+            }
+        }
+    },
+    {
+        id: "6xwd0whqpv",
+        name: "Oktoberfest",
+        favorite: true,
+        messages: [],
+        latestMessage () {
+            if (!!this.messages.length){
+                const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
+                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                } else {
+                return "No Messages"
+            }
+        }
+    },
+    {   
+        id: "pc2z0hhkyf",
+        name: "Weather",
+        favorite: false,
+        messages: [],
+        latestMessage () {
+            if (!!this.messages.length){
+                const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
+                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                } else {
+                   return "No Messages"
+            }
+        }
+    },
+    {
+        id: "achndt7tst",
+        name: "SevenContinents",
+        favorite: false,
+        messages: [],
+        latestMessage () {
+            if (!!this.messages.length){
+                const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
+                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                } else {
+                   return "No Messages"
+            }
+        }
+    }
 ];
