@@ -43,7 +43,10 @@
             <a class="material-icons button" id="send-button">send</a>
         </div>
         <div id="emoji-area">
-                <h2>Emojis</h2>
+                <div id="emoji-header">
+                    <span>Emojis</span>
+                    <a class="material-icons button" id="close-emoticon-button">cancel</a>
+                </div>
                 <div id="emoji-list"></div>
         </div>   
     </section>
@@ -52,15 +55,14 @@
                 <p>Channel Name</p>
                 <input type="text" id="channel-name" name="channel-name" minlength="1" maxlength="500">
                 <div id="modal-buttons">
-                    <span class="button" id="cancel-button">
-                        <a class="material-icons">cancel</a>
-                        <span>cancel</span>
+                    <span class="button button-vertical-center" id="cancel-button">
+                        <a class="material-icons button-icons">cancel</a>
+                        <span class="button-text">cancel</span>
                     </span>
-                    <span class="button" id="check-button">
-                        <a class="material-icons button" id="check-button">check</a>
-                        <span>create</span>
+                    <span class="button button-vertical-center" id="check-button">
+                        <a class="material-icons button-icons" >check</a>
+                        <span class="button-text">create</span>
                     </span>
-                    
                 </div>
             </div>
     </section>

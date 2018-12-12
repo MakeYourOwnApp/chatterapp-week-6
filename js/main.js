@@ -280,6 +280,7 @@ function loadEmojis() {
 }
 
 document.getElementById('emoticon-button').addEventListener('click', toggleEmojiArea);
+document.getElementById('close-emoticon-button').addEventListener('click', toggleEmojiArea);
 
 function toggleEmojiArea(){
     const emojiArea = document.getElementById('emoji-area');
