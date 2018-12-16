@@ -181,7 +181,9 @@ function favoriteChannel(){
 
 // simple sort function: insert current channel at [0] in channels array and call it if new message is sent
 function sortChannels() {
+    //remove first
     channels = channels.filter(channel => channel.id !== currentChannel.id);
+    //insert
     channels.unshift(currentChannel);
 }
 
