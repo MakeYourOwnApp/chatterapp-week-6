@@ -5,6 +5,9 @@ const mockMessages = [
         channel: "0nlbop5f1e",
         own: false,
         text: 'What\'s up?',
+        yesterdayOrOlder() {
+            return new Date().getDate() - this.createdOn.getDate() > 1
+        }
     },
     {
         createdBy: "Christina Buck",
@@ -12,6 +15,9 @@ const mockMessages = [
         channel: "0nlbop5f1e",
         own: false,
         text: 'The new chatter app looks lit!',
+        yesterdayOrOlder() {
+            return new Date().getDate() - this.createdOn.getDate() > 1
+        }
     },
     {
         createdBy: "Sabrina Adams",
@@ -19,6 +25,9 @@ const mockMessages = [
         channel: "0nlbop5f1e",
         own: false,
         text: 'Learning js is so much fun. What do you think about it?',
+        yesterdayOrOlder() {
+            return new Date().getDate() - this.createdOn.getDate() > 1
+        }
     },
     {
         createdBy: "Marco Boss",
@@ -26,6 +35,9 @@ const mockMessages = [
         own: false,
         channel: "achndt7tst",
         text: 'I wanna go to Australia!',
+        yesterdayOrOlder() {
+            return new Date().getDate() - this.createdOn.getDate() > 1
+        }
     },
     {
         createdBy: "Jessie Franklin",
@@ -33,5 +45,8 @@ const mockMessages = [
         channel: "achndt7tst",
         own: false,
         text: 'Me too',
+        yesterdayOrOlder() {
+            return new Date().getDate() - this.createdOn.getDate() > 1
+        }
     }
 ]

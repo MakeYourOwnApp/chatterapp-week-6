@@ -7,9 +7,14 @@ const mockChannels = [
         latestMessage () {
             if (!!this.messages.length){
                 const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
-                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                // if message is from yesterday or older, display date, else display time
+                if (new Date().getDate() - latest.getDate() > 1) {
+                    return latest.toLocaleDateString(browserLanguage, {year:"numeric", month:"numeric", day: "numeric"})
                 } else {
-                   return "No Messages"
+                    return latest.toLocaleTimeString(browserLanguage, {hour:"numeric", minute:"numeric"})
+                }
+            } else {
+                return "No Messages"
             }
         }
     },
@@ -21,8 +26,13 @@ const mockChannels = [
         latestMessage () {
             if (!!this.messages.length){
                 const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
-                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                // if message is from yesterday or older, display date, else display time
+                if (new Date().getDate() - latest.getDate() > 1) {
+                    return latest.toLocaleDateString(browserLanguage, {year:"numeric", month:"numeric", day: "numeric"})
                 } else {
+                    return latest.toLocaleTimeString(browserLanguage, {hour:"numeric", minute:"numeric"})
+                }
+            } else {
                 return "No Messages"
             }
         }
@@ -35,9 +45,14 @@ const mockChannels = [
         latestMessage () {
             if (!!this.messages.length){
                 const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
-                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                // if message is from yesterday or older, display date, else display time
+                if (new Date().getDate() - latest.getDate() > 1) {
+                    return latest.toLocaleDateString(browserLanguage, {year:"numeric", month:"numeric", day: "numeric"})
                 } else {
-                   return "No Messages"
+                    return latest.toLocaleTimeString(browserLanguage, {hour:"numeric", minute:"numeric"})
+                }
+            } else {
+                return "No Messages"
             }
         }
     },
@@ -49,9 +64,14 @@ const mockChannels = [
         latestMessage () {
             if (!!this.messages.length){
                 const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
-                return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+                // if message is from yesterday or older, display date, else display time
+                if (new Date().getDate() - latest.getDate() > 1) {
+                    return latest.toLocaleDateString(browserLanguage, {year:"numeric", month:"numeric", day: "numeric"})
                 } else {
-                   return "No Messages"
+                    return latest.toLocaleTimeString(browserLanguage, {hour:"numeric", minute:"numeric"})
+                }
+            } else {
+                return "No Messages"
             }
         }
     }

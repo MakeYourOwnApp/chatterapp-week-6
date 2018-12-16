@@ -7,6 +7,9 @@ let messages = [];
 /** create global variable for the currently selected channel */
 let currentChannel;
 
+// get browser language for formatting of time stamp
+const browserLanguage = navigator.language || navigator.userLanguage; 
+
 // Functions to execute when DOM has loaded
 document.addEventListener("DOMContentLoaded", () => {
     console.log("App is initialized")
@@ -103,13 +106,19 @@ function Channel(name) {
     this.messages = [];
 }
 
-// Object method that returns the date of the latest message
+// Object method that returns the date of the latest message (to display it in channel section)
 Channel.prototype.latestMessage = function() {
+    //if messages exist, display timestamp
     if (!!this.messages.length){
-        const latest = new Date(Math.max(...this.messages.map(x => x.createdOn)));
-        return latest.toLocaleTimeString("de-DE", {hour:"numeric", minute:"numeric"})
+        const latest = new Date(Math.max(...this.messages.map(message => message.createdOn)));
+        // if message is from yesterday or older, display date, else display time
+        if (new Date().getDate() - latest.getDate() > 1) {
+            return latest.toLocaleDateString(browserLanguage, {year:"numeric", month:"numeric", day: "numeric"})
         } else {
-           return "No Messages"
+            return latest.toLocaleTimeString(browserLanguage, {hour:"numeric", minute:"numeric"})
+        }
+    } else {
+        return "No Messages"
     }
 }
 
@@ -180,6 +189,10 @@ function Message(user, own, text, channelID) {
     this.text = text;
     this.channel = channelID;
 }
+// Object method that returns the if message is from yesterday or older
+Message.prototype.yesterdayOrOlder = function() {
+    return new Date().getDate() - this.createdOn.getDate() > 1
+}
 
 // Event Listener: New message will be sent if user clicks send button or presses enter.
 // send button is grayed out if there is no input provided
@@ -209,19 +222,25 @@ function sendMessage() {
         document.getElementById('message-input').value = '';
         document.getElementById('send-button').style.color = "#00838f54";
         showMessages();
-        setTimeout(receiveEchoMessage, 1500);
+        receiveEchoMessage();
     } else {
         return
     }
 }
-
 
 // Show the messages of the selected channel
 function showMessages() {
     const chatArea = document.getElementById('chat-area');
     chatArea.innerHTML = ""
     currentChannel.messages.forEach(message => {
-        const messageTime = message.createdOn.toLocaleTimeString("de-DE", {hour: "numeric", minute: "numeric"});
+        // if message is older than 24 hours, display full date
+        let messageTime;
+        if (message.yesterdayOrOlder()) {
+            messageTime = message.createdOn.toLocaleTimeString(browserLanguage, {year:"numeric", month:"numeric", day:"numeric", hour: "numeric", minute: "numeric"});
+        } else {
+            messageTime = message.createdOn.toLocaleTimeString(browserLanguage, {hour: "numeric", minute: "numeric"});
+        }
+
         let messageString;
         if (message.own){
             messageString =   `<div class="message outgoing-message">
@@ -260,7 +279,8 @@ function receiveEchoMessage() {
     const channelID = currentChannel.id;
     const message = new Message (userName, own, text, channelID);
     currentChannel.messages.push(message);
-    showMessages();
+    // set timeout for a more natural response time
+    setTimeout(showMessages, 1500)
 }
 
 // --------------------- Emojis ----------------------------
