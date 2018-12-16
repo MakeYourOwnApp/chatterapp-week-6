@@ -62,6 +62,10 @@ function displayChannels() {
             regularList.innerHTML += channelString
         }
     })
+    // always add selected class to current channel
+    if (!!currentChannel) {
+        document.getElementById(currentChannel.id).classList.add("selected")
+    }
 }
 
 /** 
@@ -147,7 +151,7 @@ function createChannel() {
     if (!!channelName) {
         const channel = new Channel (channelName)
         console.log("New Channel: ", channel);
-        channels.push(channel);
+        channels.unshift(channel);
         document.getElementById('channel-name').value = '';
         document.getElementById('modal').style.display = "none";
         currentChannel = channel;
@@ -173,7 +177,13 @@ function favoriteChannel(){
     switchChannel(currentChannel.id)
 }
 
-// TODO: sort channel function
+// TODO: sort channel function: by timestamp of latest message
+
+// simple sort function: insert current channel at [0] in channels array and call it if new message is sent
+function sortChannels() {
+    channels = channels.filter(channel => channel.id !== currentChannel.id);
+    channels.unshift(currentChannel);
+}
 
 //---------------- Messages-----------------------------------
 
@@ -224,6 +234,8 @@ function sendMessage() {
         document.getElementById('message-input').value = '';
         document.getElementById('send-button').style.color = "#00838f54";
         showMessages();
+        sortChannels();
+        displayChannels();
         receiveEchoMessage();
     } else {
         return
