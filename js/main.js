@@ -173,6 +173,8 @@ function favoriteChannel(){
     switchChannel(currentChannel.id)
 }
 
+// TODO: sort channel function
+
 //---------------- Messages-----------------------------------
 
 /** 
