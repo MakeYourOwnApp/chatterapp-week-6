@@ -5,7 +5,7 @@ let channels = [];
 let messages = [];
 
 /** create global variable for the currently selected channel */
-let currentChannel;
+let selectedChannel;
 
 // get browser language for formatting of time stamp
 const browserLanguage = navigator.language || navigator.userLanguage; 
@@ -51,20 +51,20 @@ function displayChannels() {
     favoriteList.innerHTML = ""
     regularList.innerHTML = ""
     channels.forEach(channel => {
-        const channelString = ` <li id="` + channel.id + `" onclick="switchChannel(this.id)">
-                                    <i class="material-icons">group</i>
-                                    <span class="channel-name">` + channel.name + `</span>
-                                    <span class="timestamp">`+ channel.latestMessage() + `</span>
-                                </li>`
+        const currentChannelHtmlString = `  <li id="` + channel.id + `" onclick="switchChannel(this.id)">
+                                                <i class="material-icons">group</i>
+                                                <span class="channel-name">` + channel.name + `</span>
+                                                <span class="timestamp">`+ channel.latestMessage() + `</span>
+                                            </li>`
         if (channel.favorite) {
-            favoriteList.innerHTML += channelString
+            favoriteList.innerHTML += currentChannelHtmlString;
         } else {
-            regularList.innerHTML += channelString
+            regularList.innerHTML += currentChannelHtmlString;
         }
     })
     // always add selected class to current channel
-    if (!!currentChannel) {
-        document.getElementById(currentChannel.id).classList.add("selected")
+    if (!!selectedChannel) {
+        document.getElementById(selectedChannel.id).classList.add("selected")
     }
 }
 
@@ -74,13 +74,13 @@ function displayChannels() {
  */
 function switchChannel(selectedChannelID) {
     console.log("selected channel with id: " + selectedChannelID)
-    if (!!currentChannel){
-        document.getElementById(currentChannel.id).classList.remove("selected")
+    if (!!selectedChannel){
+        document.getElementById(selectedChannel.id).classList.remove("selected")
     }
     document.getElementById(selectedChannelID).classList.add("selected")
     channels.forEach(channel => {
         if (channel.id === selectedChannelID ) {
-            currentChannel = channel
+            selectedChannel = channel
         }  
     })
     // hide user prompt and show input area the first time a user selects a channel
@@ -95,8 +95,8 @@ function switchChannel(selectedChannelID) {
 
 // changes header name and favorite button
 function showHeader(){
-    document.getElementById("message-area-header").getElementsByTagName('h1')[0].innerHTML = currentChannel.name;
-    document.getElementById('favorite-button').innerHTML = (currentChannel.favorite)? "favorite" : "favorite_border";
+    document.getElementById("message-area-header").getElementsByTagName('h1')[0].innerHTML = selectedChannel.name;
+    document.getElementById('favorite-button').innerHTML = (selectedChannel.favorite)? "favorite" : "favorite_border";
 }
 
 /** 
@@ -154,7 +154,7 @@ function createChannel() {
         channels.unshift(channel);
         document.getElementById('channel-name').value = '';
         document.getElementById('modal').style.display = "none";
-        currentChannel = channel;
+        selectedChannel = channel;
         displayChannels();
         switchChannel(channel.id);
     } else {
@@ -167,14 +167,14 @@ document.getElementById('favorite-button').addEventListener('click', favoriteCha
 
 // Toggles favorite property of channel and displays channel accordingly in sidebar
 function favoriteChannel(){
-    currentChannel.favorite = (currentChannel.favorite) ? false : true;
+    selectedChannel.favorite = (selectedChannel.favorite) ? false : true;
     channels.forEach(channel => {
-        if(channel.id === currentChannel.id){
-            channel = currentChannel;
+        if(channel.id === selectedChannel.id){
+            channel = selectedChannel;
         }
     })
     displayChannels();
-    switchChannel(currentChannel.id)
+    switchChannel(selectedChannel.id)
 }
 
 // TODO: sort channel function: by timestamp of latest message
@@ -182,9 +182,9 @@ function favoriteChannel(){
 // simple sort function: insert current channel at [0] in channels array and call it if new message is sent
 function sortChannels() {
     //remove first
-    channels = channels.filter(channel => channel.id !== currentChannel.id);
+    channels = channels.filter(channel => channel.id !== selectedChannel.id);
     //insert
-    channels.unshift(currentChannel);
+    channels.unshift(selectedChannel);
 }
 
 //---------------- Messages-----------------------------------
@@ -229,10 +229,10 @@ function sendMessage() {
     if (!!text) {
         const myUserName = "Basti";
         const own = true;
-        const channelID = currentChannel.id;
+        const channelID = selectedChannel.id;
         const message = new Message (myUserName, own, text, channelID)
         console.log("New message: ", message);
-        currentChannel.messages.push(message);
+        selectedChannel.messages.push(message);
         document.getElementById('message-input').value = '';
         document.getElementById('send-button').style.color = "#00838f54";
         showMessages();
@@ -248,7 +248,7 @@ function sendMessage() {
 function showMessages() {
     const chatArea = document.getElementById('chat-area');
     chatArea.innerHTML = ""
-    currentChannel.messages.forEach(message => {
+    selectedChannel.messages.forEach(message => {
         // if message is older than 24 hours, display full date
         let messageTime;
         if (message.yesterdayOrOlder()) {
@@ -257,44 +257,44 @@ function showMessages() {
             messageTime = message.createdOn.toLocaleTimeString(browserLanguage, {hour: "numeric", minute: "numeric"});
         }
 
-        let messageString;
+        let currentMessageHtmlString;
         if (message.own){
-            messageString =   `<div class="message outgoing-message">
-                                    <div class="message-wrapper">
-                                        <div class="message-content">
-                                            <p>` + message.text + `</p>
-                                        </div>
-                                        <i class="material-icons">account_circle</i>
-                                    </div>
-                                    <span class="timestamp">`+ messageTime + `</span>
-                                </div>`;
+            currentMessageHtmlString =   `  <div class="message outgoing-message">
+                                                <div class="message-wrapper">
+                                                    <div class="message-content">
+                                                        <p>` + message.text + `</p>
+                                                    </div>
+                                                    <i class="material-icons">account_circle</i>
+                                                </div>
+                                                <span class="timestamp">`+ messageTime + `</span>
+                                            </div>`;
         } else {
-            messageString =   `<div class="message incoming-message">
-                                    <div class="message-wrapper">
-                                        <i class="material-icons">account_circle</i>
-                                        <div class="message-content">
-                                            <h3>` + message.createdBy + `</h3>
-                                            <p>` + message.text + `</p>
-                                        </div>
-                                    </div>
-                                    <span class="timestamp">`+ messageTime + `</span>
-                                </div>`;
+            currentMessageHtmlString =   `  <div class="message incoming-message">
+                                                <div class="message-wrapper">
+                                                    <i class="material-icons">account_circle</i>
+                                                    <div class="message-content">
+                                                        <h3>` + message.createdBy + `</h3>
+                                                        <p>` + message.text + `</p>
+                                                    </div>
+                                                </div>
+                                                <span class="timestamp">`+ messageTime + `</span>
+                                            </div>`;
         }
-        chatArea.innerHTML += messageString;
+        chatArea.innerHTML += currentMessageHtmlString;
     })
     chatArea.scrollTop = chatArea.scrollHeight;
     //update timestamp in channel area
-    document.getElementById(currentChannel.id).querySelector(".timestamp").innerHTML = currentChannel.latestMessage();
+    document.getElementById(selectedChannel.id).querySelector(".timestamp").innerHTML = selectedChannel.latestMessage();
 }
 
 // get an echo message
 function receiveEchoMessage() {
     const userName = "Lorenz";
     const own = false;
-    const text = "You wrote: " + currentChannel.messages.slice(-1)[0].text;
-    const channelID = currentChannel.id;
+    const text = "You wrote: " + selectedChannel.messages.slice(-1)[0].text;
+    const channelID = selectedChannel.id;
     const message = new Message (userName, own, text, channelID);
-    currentChannel.messages.push(message);
+    selectedChannel.messages.push(message);
     // set timeout for a more natural response time
     setTimeout(showMessages, 1500)
 }
